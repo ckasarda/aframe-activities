@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script> <!-- Older A-Frame version allows physics to work -->
+    <script src="https://unpkg.com/aframe-leap-hands@0.8.0/dist/aframe-leap-hands.umd.js"></script> <!-- Leap Motion Controller SDK -->
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script> <!-- A-Frame Physics system that works with Leap Hands and objects -->
+    <script src="log-leap.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-entity camera="near: 0.01" look-controls log-leap="id: 0; trial: 0">
+        <a-entity leap-hand="hand: left"></a-entity>
+        <a-entity leap-hand="hand: right"></a-entity>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
