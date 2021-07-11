@@ -7,11 +7,13 @@ AFRAME.registerComponent('log-leap', {
     // We use the initialization function to setup our logging variables
     init: function () {
         this.leapcontroller = document.querySelector('a-scene').systems.leap.controller;
+        this.seconds = 0;
         var header = '~';
         header += 'id,';
         header += 'trial,';
-        header += 'time,';
-        header += 'delta,';
+        header += 'time-ms,';
+        header += 'delta-ms,';
+        header += 'time-sec,';
         header += 'left-valid,';
         header += 'left-x,';
         header += 'left-y,';
@@ -81,11 +83,13 @@ AFRAME.registerComponent('log-leap', {
                 righthand += hands[i].grabStrength;
             }
         }
+        if ((time / ((this.seconds + 1) * 1000)) >= 1) { this.seconds += 1; }
         var log = '~';
         log += this.data.id + ',';
         log += this.data.trial + ',';
         log += time + ',';
         log += timeDelta + ',';
+        log += this.seconds + ','
         log += lefthand + ',';
         log += righthand;
         console.log(log);
