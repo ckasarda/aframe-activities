@@ -12,6 +12,7 @@ AFRAME.registerComponent('log-leap', {
         header += 'trial,';
         header += 'time,';
         header += 'delta,';
+        header += 'left-valid,';
         header += 'left-x,';
         header += 'left-y,';
         header += 'left-z,';
@@ -25,6 +26,7 @@ AFRAME.registerComponent('log-leap', {
         header += 'left-speed-y,';
         header += 'left-speed-z,';
         header += 'left-grab,';
+        header += 'right-valid,';
         header += 'right-x,';
         header += 'right-y,';
         header += 'right-z,';
@@ -42,12 +44,13 @@ AFRAME.registerComponent('log-leap', {
     },
     // Send leap hand data to the console via logging
     tick: function (time, timeDelta) {
-        var lefthand = '0,0,0,0,0,0,0,0,0,0,0,0,0';
-        var righthand = '0,0,0,0,0,0,0,0,0,0,0,0,0';
+        var lefthand = 'N,0,0,0,0,0,0,0,0,0,0,0,0,0';
+        var righthand = 'N,0,0,0,0,0,0,0,0,0,0,0,0,0';
         var hands = this.leapcontroller.lastFrame.hands;
         for (let i = 0; i < hands.length; i++) {
             if (hands[i].type === 'left') {
-                lefthand = hands[i].palmPosition[0] + ',';
+                lefthand = 'Y,';
+                lefthand += hands[i].palmPosition[0] + ',';
                 lefthand += hands[i].palmPosition[1] + ',';
                 lefthand += hands[i].palmPosition[2] + ',';
                 lefthand += hands[i].pitch() + ',';
@@ -62,7 +65,8 @@ AFRAME.registerComponent('log-leap', {
                 lefthand += hands[i].grabStrength;
             }
             else if (hands[i].type === 'right') {
-                righthand = hands[i].palmPosition[0] + ',';
+                righthand = 'Y,';
+                righthand += hands[i].palmPosition[0] + ',';
                 righthand += hands[i].palmPosition[1] + ',';
                 righthand += hands[i].palmPosition[2] + ',';
                 righthand += hands[i].pitch() + ',';
