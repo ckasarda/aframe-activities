@@ -4,7 +4,7 @@
 3. For the leap-log component, specify the id (participant's id number) and trial (trial number) properties
 4. Run the A-Frame scene in your browser
 5. When you are done running the scene, or when your trial is over, right click on the browser window where your A-Frame scene is running and select inspect
-6. Click on the console tab, and you will see data rows being printed out; you will want to right click on the printed out data and click save as
+6. Click on the console tab, and you will see data rows being printed out; you will want to right click on the printed out data and click save as and then save it to your computer
 7. Once your data is saved to your computer, move it to the folder where you have these files: log-leap.js, log-to-csv.py, leaphands.html
 8. Run the log-to-csv.py python program and complete the prompts that ask name of log file (what you downloaded and saved from the web browser) and the name of the csv file you want to create and store the data to.
 9. Done! You should now have generated a csv file that contains your leap hand data
