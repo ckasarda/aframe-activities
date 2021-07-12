@@ -1,4 +1,5 @@
 # How to log data
+0. Recommendation: Some browsers have different layouts for their inspect tools, so I would recommend you use Chrome since it also as a save as option
 1. Make sure to add the javascript or a reference to the javascript with the A-Frame component code to your A-Frame HTML file
 2. Add the leap-log component to any entity in your scene (For the leap motion controllers, I usually add it to the a-entity that also has the camera and look-controls added)
 3. For the leap-log component, specify the id (participant's id number) and trial (trial number) properties
