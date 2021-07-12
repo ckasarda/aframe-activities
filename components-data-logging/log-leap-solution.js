@@ -1,11 +1,13 @@
-AFRAME.registerComponent('insert-name-here', {
+AFRAME.registerComponent('log-leap', {
     // The participant's id number and trial number can be added to the log
     schema: {
-        // QUESTION #1
+        id: {type: 'int'},
+        trial: {type: 'int'}
     },
     // We use the initialization function to setup our logging variables
     init: function () {
-        // QUESTION #2
+        this.leapcontroller = document.querySelector('a-scene').systems.leap.controller;
+        this.seconds = 0;
         var header = '~';
         header += 'id,';
         header += 'trial,';
@@ -40,7 +42,7 @@ AFRAME.registerComponent('insert-name-here', {
         header += 'right-speed-y,';
         header += 'right-speed-z,';
         header += 'right-grab';
-        // QUESTION #3
+        console.log(header);
     },
     // Send leap hand data to the console via logging
     tick: function (time, timeDelta) {
@@ -48,8 +50,7 @@ AFRAME.registerComponent('insert-name-here', {
         var righthand = 'N,0,0,0,0,0,0,0,0,0,0,0,0,0';
         var hands = this.leapcontroller.lastFrame.hands;
         for (let i = 0; i < hands.length; i++) {
-            // QUESTION #4 PART #1
-            if (hands[i].type === 'insert-hand-name-here') {
+            if (hands[i].type === 'left') {
                 lefthand = 'Y,';
                 lefthand += hands[i].palmPosition[0] + ',';
                 lefthand += hands[i].palmPosition[1] + ',';
@@ -65,8 +66,7 @@ AFRAME.registerComponent('insert-name-here', {
                 lefthand += hands[i].palmVelocity[2] + ',';
                 lefthand += hands[i].grabStrength;
             }
-            // QUESTION #4 PART 2
-            else if (hands[i].type === 'insert-other-hand-name-here') {
+            else if (hands[i].type === 'right') {
                 righthand = 'Y,';
                 righthand += hands[i].palmPosition[0] + ',';
                 righthand += hands[i].palmPosition[1] + ',';
@@ -83,19 +83,15 @@ AFRAME.registerComponent('insert-name-here', {
                 righthand += hands[i].grabStrength;
             }
         }
-        if ((time / ((this.seconds + 1) * 1000)) >= 1) { 
-            // QUESTION #5
-        }
+        if ((time / ((this.seconds + 1) * 1000)) >= 1) { this.seconds += 1; }
         var log = '~';
-        // QUESTION #6
-        log += '' + ',';
-        log += '' + ',';
+        log += this.data.id + ',';
+        log += this.data.trial + ',';
         log += time + ',';
         log += timeDelta + ',';
-        log += '' + ','
-        log += '' + ',';
-        log += '';
-        // QUESTION #7
-        console.log();
+        log += this.seconds + ','
+        log += lefthand + ',';
+        log += righthand;
+        console.log(log);
     }
 });
