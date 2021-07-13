@@ -10,6 +10,9 @@ AFRAME.registerComponent('log-leap', {
     init: function () {
         this.leapcontroller = document.querySelector('a-scene').systems.leap.controller;
         this.seconds = 0;
+        this.trackables = document.querySelectorAll('[trackable]');
+        this.pastposlist = [];
+        this.pastrotlist = [];
         var header = '~';
         header += 'id,';
         header += 'trial,';
@@ -46,9 +49,13 @@ AFRAME.registerComponent('log-leap', {
         header += 'right-speed-y,';
         header += 'right-speed-z,';
         header += 'right-grab';
+        for (let i = 0; i < this.trackables.length; i++) {
+            this.pastposlist.push(JSON.stringify(this.trackables[i].getAttribute('position')));
+            this.pastrotlist.push(JSON.stringify(this.trackables[i].getAttribute('rotation')));
+            header += ',' + this.trackables[i].id;
+        }
         console.log(header);
     },
-    // Send leap hand data to the console via logging
     tick: function (time, timeDelta) {
         var lefthand = 'N,0,0,0,0,0,0,0,0,0,0,0,0,0';
         var righthand = 'N,0,0,0,0,0,0,0,0,0,0,0,0,0';
@@ -87,6 +94,21 @@ AFRAME.registerComponent('log-leap', {
                 righthand += hands[i].grabStrength;
             }
         }
+        var trackables_log = '';
+        for (let i = 0; i < this.trackables.length; i++) {
+            if (Math.abs(JSON.parse(this.pastposlist[i]).x - this.trackables[i].getAttribute('position').x) > 0.01 ||
+                Math.abs(JSON.parse(this.pastposlist[i]).y - this.trackables[i].getAttribute('position').y) > 0.01 ||
+                Math.abs(JSON.parse(this.pastposlist[i]).z - this.trackables[i].getAttribute('position').z) > 0.01 ||
+                Math.abs(JSON.parse(this.pastrotlist[i]).x - this.trackables[i].getAttribute('rotation').x) > 0.01 ||
+                Math.abs(JSON.parse(this.pastrotlist[i]).y - this.trackables[i].getAttribute('rotation').y) > 0.01 ||
+                Math.abs(JSON.parse(this.pastrotlist[i]).z - this.trackables[i].getAttribute('rotation').z) > 0.01) {
+                    trackables_log += ',Y';
+                    this.pastposlist[i] = JSON.stringify(this.trackables[i].getAttribute('position'));
+                    this.pastrotlist[i] = JSON.stringify(this.trackables[i].getAttribute('rotation'));
+            } else {
+                trackables_log += ',N';
+            }
+        }
         if ((time / ((this.seconds + 1) * 1000)) >= 1) { this.seconds += 1; }
         var log = '~';
         log += this.data.id + ',';
@@ -98,6 +120,7 @@ AFRAME.registerComponent('log-leap', {
         log += this.seconds + ','
         log += lefthand + ',';
         log += righthand;
+        log += trackables_log;
         console.log(log);
     }
 });

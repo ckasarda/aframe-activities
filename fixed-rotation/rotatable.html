@@ -6,19 +6,25 @@
   </head>
   <body>
     <a-scene>
+      <!-- Add models -->
+      <a-assets>
+        <a-asset-items id="letterb" src="Bdestructed.glb"></a-asset-items>
+      </a-assets>
+
       <!-- Player -->
       <a-entity camera="near: 0.01" look-controls>
         <a-entity leap-hand="hand: left; enablePhysics: true;"></a-entity>
         <a-entity leap-hand="hand: right; enablePhysics: true;"></a-entity>
       </a-entity>
 
-      <!-- Rotatable Box -->
-      <a-box constraint="target: #lock; type: hinge; axis: 0 1 0"
-             scale="0.25 0.25 0.25"
-             position="0.0 0.0 -0.5"
+      <!-- Rotatable Object -->
+      <a-entity gltf-model="#letterb"
+             constraint="target: #lock; type: hinge; axis: 0 1 0"
+             scale="0.01 0.01 0.01"
+             position="-0.5 0.0 -0.3"
              color="green"
-             dynamic-body="shape: box"></a-box>
-      <a-entity id="lock" rotation="-90 0 0" static-body position="0 0.0 -0.5">
+             dynamic-body="shape: box"></a-entity>
+      <a-entity id="lock" rotation="-90 0 0" static-body position="0 0.0 -0.3">
 
       <!-- Invisible Pedestal -->
       <a-plane visible="false" scale="10 10" rotation="-90 0 0" position="0 -2 -4" static-body></a-plane>
