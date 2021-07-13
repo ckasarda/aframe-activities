@@ -2,6 +2,8 @@ AFRAME.registerComponent('insert-name-here', {
     // The participant's id number and trial number can be added to the log
     schema: {
         // QUESTION #1
+        variable: {type: 'string'},
+        order: {type: 'int'}
     },
     // We use the initialization function to setup our logging variables
     init: function () {
@@ -9,6 +11,8 @@ AFRAME.registerComponent('insert-name-here', {
         var header = '~';
         header += 'id,';
         header += 'trial,';
+        header += 'variable,';
+        header += 'order,';
         header += 'time-ms,';
         header += 'delta-ms,';
         header += 'time-sec,';

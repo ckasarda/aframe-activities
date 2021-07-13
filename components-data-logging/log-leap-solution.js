@@ -1,8 +1,10 @@
 AFRAME.registerComponent('log-leap', {
     // The participant's id number and trial number can be added to the log
     schema: {
-        id: {type: 'int'},
-        trial: {type: 'int'}
+        id: {type: 'int', default: 0},
+        trial: {type: 'string', default: "A"},
+        variable: {type: 'string', default: "T"},
+        order: {type: 'int', default: 0}
     },
     // We use the initialization function to setup our logging variables
     init: function () {
@@ -11,6 +13,8 @@ AFRAME.registerComponent('log-leap', {
         var header = '~';
         header += 'id,';
         header += 'trial,';
+        header += 'variable,';
+        header += 'order,';
         header += 'time-ms,';
         header += 'delta-ms,';
         header += 'time-sec,';
@@ -87,6 +91,8 @@ AFRAME.registerComponent('log-leap', {
         var log = '~';
         log += this.data.id + ',';
         log += this.data.trial + ',';
+        log += this.data.variable + ',';
+        log += this.data.order + ',';
         log += time + ',';
         log += timeDelta + ',';
         log += this.seconds + ','
