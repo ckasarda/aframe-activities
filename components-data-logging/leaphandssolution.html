@@ -4,7 +4,6 @@
     <script src="https://unpkg.com/aframe-leap-hands@0.8.0/dist/aframe-leap-hands.umd.js"></script> <!-- Leap Motion Controller SDK -->
     <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script> <!-- A-Frame Physics system that works with Leap Hands and objects -->
     <script src="log-leap-solution.js"></script>
-    <script> AFRAME.registerComponent('trackable', {}); </script>
   </head>
   <body>
     <a-scene>
@@ -14,8 +13,8 @@
         <a-entity leap-hand="hand: right; enablePhysics: true"></a-entity>
       </a-entity>
       <!-- Moveable Tracked Objects -->
-      <a-box dynamic-body scale="0.2 0.2 0.2" color="#ABC123" position="0 1 -0.35" trackable id="dynbox"></a-box>
-      <a-sphere dynamic-body radius="0.1" color="#123ABC" position="0.5 1 -0.35" trackable id="dynsphere"></a-sphere>
+      <a-box dynamic-body scale="0.2 0.2 0.2" color="#ABC123" position="0 1 -0.35" class="trackable" id="dynbox"></a-box>
+      <a-sphere dynamic-body radius="0.1" color="#123ABC" position="0.5 1 -0.35" class="trackable" id="dynsphere"></a-sphere>
       <!-- Ground Floor -->
       <a-plane static-body color="#000000" rotation="-90 0 0" scale="10 10" position="0 -0.25 -4"></a-plane>
     </a-scene>

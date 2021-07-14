@@ -10,7 +10,7 @@ AFRAME.registerComponent('log-leap', {
     init: function () {
         this.leapcontroller = document.querySelector('a-scene').systems.leap.controller;
         this.seconds = 0;
-        this.trackables = document.querySelectorAll('[trackable]');
+        this.trackables = document.querySelectorAll('.trackable');
         this.pastposlist = [];
         this.pastrotlist = [];
         var header = '~';
