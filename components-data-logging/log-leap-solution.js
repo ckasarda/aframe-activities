@@ -52,7 +52,13 @@ AFRAME.registerComponent('log-leap', {
         for (let i = 0; i < this.trackables.length; i++) {
             this.pastposlist.push(JSON.stringify(this.trackables[i].getAttribute('position')));
             this.pastrotlist.push(JSON.stringify(this.trackables[i].getAttribute('rotation')));
-            header += ',' + this.trackables[i].id;
+            header += ',' + this.trackables[i].id + '-update';
+            header += ',' + this.trackables[i].id + '-x';
+            header += ',' + this.trackables[i].id + '-y';
+            header += ',' + this.trackables[i].id + '-z';
+            header += ',' + this.trackables[i].id + '-pitch';
+            header += ',' + this.trackables[i].id + '-roll';
+            header += ',' + this.trackables[i].id + '-yaw';
         }
         console.log(header);
     },
@@ -108,6 +114,12 @@ AFRAME.registerComponent('log-leap', {
             } else {
                 trackables_log += ',N';
             }
+            trackables_log += ',' + this.trackables[i].getAttribute('position').x;
+            trackables_log += ',' + this.trackables[i].getAttribute('position').y;
+            trackables_log += ',' + this.trackables[i].getAttribute('position').z;
+            trackables_log += ',' + this.trackables[i].getAttribute('rotation').x;
+            trackables_log += ',' + this.trackables[i].getAttribute('rotation').y;
+            trackables_log += ',' + this.trackables[i].getAttribute('rotation').z;
         }
         if ((time / ((this.seconds + 1) * 1000)) >= 1) { this.seconds += 1; }
         var log = '~';
