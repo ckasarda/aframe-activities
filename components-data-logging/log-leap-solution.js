@@ -52,11 +52,7 @@ AFRAME.registerComponent('log-leap', {
         for (let i = 0; i < this.trackables.length; i++) {
             this.pastposlist.push(JSON.stringify(this.trackables[i].getAttribute('position')));
             this.pastrotlist.push(JSON.stringify(this.trackables[i].getAttribute('rotation')));
-            if (this.trackables[i].id == undefined) {
-                header += ',' + this.trackables[i].id;
-            } else {
-                header += ',obj' + i;
-            }
+            header += ',' + this.trackables[i].id;
         }
         console.log(header);
     },
